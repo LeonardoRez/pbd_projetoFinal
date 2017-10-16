@@ -12,20 +12,15 @@ import java.util.ArrayList;
 public class DBFGerenciador {
 
     private DBFReader leitor;
-    private FileInputStream arquivo;
+    private String arquivo;
 
-    public DBFGerenciador(String caminho) {
-        try {
-            arquivo = new FileInputStream(caminho);    
-        } catch (FileNotFoundException e) {
-            System.out.println("Arquivo DBF não encontrado!");
-        }
-        
+    public DBFGerenciador(String caminhoDBF) {
+            this.arquivo = caminhoDBF;
     }
 
     public String[] carregarColunas() throws FileNotFoundException {
         String[] colunas;
-        leitor = new DBFReader(arquivo);
+        leitor = new DBFReader(new FileInputStream(arquivo));
 
         // get the field count if you want for some reasons like the following
         int qtdCampos = leitor.getFieldCount();
@@ -46,16 +41,16 @@ public class DBFGerenciador {
 //        }
         return colunas;
     }
-    public ArrayList<Object[]> carregarRegistros() throws FileNotFoundException{
+
+    public ArrayList<Object[]> carregarRegistros() throws FileNotFoundException {
         ArrayList<Object[]> registros = new ArrayList();
-        leitor = new DBFReader(arquivo);
+        leitor = new DBFReader(new FileInputStream(arquivo));
         Object[] r;
-        while((r = leitor.nextRecord()) != null){
+        while ((r = leitor.nextRecord()) != null) {
             registros.add(r);
-            
+
         }
-        
-        
+
         return registros;
     }
 
@@ -63,10 +58,17 @@ public class DBFGerenciador {
         DBFGerenciador d = new DBFGerenciador("arquivo.dbf");
         try {
             for (String s : d.carregarColunas()) {
-                System.out.println(s);
+                System.out.print(s + "\t");
+            }
+            for (Object[] o : d.carregarRegistros()) {
+                System.out.print("\n");
+                for (Object ob : o) {
+                    System.out.print(ob + "\t");
+                }
             }
 
         } catch (Exception e) {
+            System.out.println("\ndeu ruim");
             e.printStackTrace();
         }
 
