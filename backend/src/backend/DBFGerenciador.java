@@ -60,12 +60,17 @@ public class DBFGerenciador {
             for (String s : d.carregarColunas()) {
                 System.out.print(s + "\t");
             }
+            
+            ArrayList a = d.carregarRegistros();            
+            System.out.println("\n\nQuantidade de registros: "+a.size()+"\n\n");
+            /*
             for (Object[] o : d.carregarRegistros()) {
                 System.out.print("\n");
                 for (Object ob : o) {
                     System.out.print(ob + "\t");
                 }
             }
+            //*/
 
         } catch (Exception e) {
             System.out.println("\ndeu ruim");
