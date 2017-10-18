@@ -31,3 +31,7 @@ virtual/*
 /backend/build/
 !/backend/mongo-java-driver-2.13.3.jar
 !/backend/javadbf-1.6.2.jar
+/frontend/nbproject/private/
+/frontend/build/
+/frontend/dist/
+/backend/dist/

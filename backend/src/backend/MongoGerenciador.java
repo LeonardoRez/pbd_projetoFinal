@@ -16,22 +16,27 @@ public class MongoGerenciador {
 
     private MongoClientURI conexaoString;
     private MongoClient mongoClient;
+    private String colecao;
     DBFGerenciador dbfG;
+    
 
-    public MongoGerenciador(String conexao, String arquivoDBF) {
-        conexaoString = new MongoClientURI(conexao);
+    public MongoGerenciador(String conexao, String arquivoDBF, String colecao) {
+        this.conexaoString = new MongoClientURI(conexao);
+        this.colecao = colecao;
+        
         dbfG = new DBFGerenciador(arquivoDBF);
         try {
             mongoClient = new MongoClient(conexaoString);
+            
         } catch (UnknownHostException e) {
             System.out.println("string de conexão inválida");
         }
     }
 
     public void converterDBFtoMONGO() {
-        DB database = mongoClient.getDB("pessoa");
+        DB database = mongoClient.getDB(colecao);
 
-        DBCollection collection = database.getCollection("pessoa");
+        DBCollection collection = database.getCollection(colecao);
         System.out.println("Coleção acessada no banco com sucesso");
 
         try {
@@ -62,7 +67,7 @@ public class MongoGerenciador {
 	}
 
     public static void main(String[] args) {
-        MongoGerenciador m = new MongoGerenciador("mongodb://localhost:27017", "arquivo.dbf");
+        MongoGerenciador m = new MongoGerenciador("mongodb://localhost:27017", "arquivo.dbf", "pessoa");
         m.converterDBFtoMONGO();
         int quant=0;
         DBCursor allResults = m.getCollection("pessoa","pessoa").find();

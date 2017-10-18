@@ -71,6 +71,7 @@ public class DBFGerenciador {
                 }
             }
             //*/
+            System.out.println("");
 
         } catch (Exception e) {
             System.out.println("\ndeu ruim");
