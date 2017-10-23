@@ -25,12 +25,18 @@ hs_err_pid*
 
 #virtualenv
 virtual/*
+
+#não ignorar os drivers do projeto
+!/backend/mongo-java-driver-2.13.3.jar
+!/backend/dans-dbf-lib-1.0.0-beta-10 .jar
+
+*arquivo_maior.dbf
+
+#arquivos do projeto adicionados pelo netbeans
 /testeDansDbf/nbproject/private/
 /testeDansDbf/build/
 /backend/nbproject/private/
 /backend/build/
-!/backend/mongo-java-driver-2.13.3.jar
-!/backend/javadbf-1.6.2.jar
 /frontend/nbproject/private/
 /frontend/build/
 /frontend/dist/
