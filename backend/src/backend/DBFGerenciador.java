@@ -49,7 +49,12 @@ public class DBFGerenciador {
         if (lista.isEmpty()) {
             return null;
         } else {
-            String[][] registros = new String[quant][this.quantColunas];
+            String[][] registros;
+            if (quant > lista.size()) {
+                registros = new String[lista.size()][this.quantColunas];
+            } else {
+                registros = new String[quant][this.quantColunas];
+            }
             int i = 0;
             for (Record rec : lista) {
                 int j = 0;
@@ -166,21 +171,19 @@ public class DBFGerenciador {
             d.prepareDBF();
             System.out.println("quant colunas: " + d.getQuantColunas());
             System.out.println("quant registros: " + d.getQuantRegistros());
-//            for(String s: d.getFieldName()){
-//                System.out.print(s + "\t");
-//            }
-//            System.out.println("");
-//            String[][] r = d.lerRegistros(0, 100000);
-//            System.out.println(r.length+"\n\n");
-//            
+            for(String s: d.getFieldName()){
+                System.out.print(s + "\t");
+            }
+            System.out.println("");
+            String[][] r = d.lerRegistros(0, 100000);
+            System.out.println(r.length+"\n\n");
+            
 //            for(String s: r[0]){
 //                System.out.print(s + "\n");
 //            }
-//            System.out.println("\n\n");
-//            for(String s: r[7000]){
-//                System.out.print(s + "\n");
-//            }
+            System.out.println("\n\n");
             
+
         } catch (Exception e) {
             System.out.println("\ndeu ruim");
             e.printStackTrace();
