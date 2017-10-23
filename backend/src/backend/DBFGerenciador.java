@@ -113,7 +113,7 @@ public class DBFGerenciador {
         }
     }
 
-    public void prepareDBF() {
+    public void prepareDBF() throws FileNotFoundException {
         this.registroAtual = 0;
         try {
 
@@ -121,7 +121,7 @@ public class DBFGerenciador {
             this.listaColunas = table.getFields();
             this.quantColunas = table.getFields().size();
 
-            System.out.println(this.quantColunas);
+//            System.out.println(this.quantColunas);
             this.quantRegistros = this.table.getRecordCount();
             this.fieldName = new String[this.quantColunas];
 
@@ -132,8 +132,6 @@ public class DBFGerenciador {
             this.table_iterator = table.recordIterator();
 
         } catch (CorruptedTableException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -164,10 +162,24 @@ public class DBFGerenciador {
     public static void main(String[] args) {
 
         try {
-            DBFGerenciador d = new DBFGerenciador("arquivo_maior.dbf");
+            DBFGerenciador d = new DBFGerenciador("arquivo.dbf");
             d.prepareDBF();
             System.out.println("quant colunas: " + d.getQuantColunas());
             System.out.println("quant registros: " + d.getQuantRegistros());
+//            for(String s: d.getFieldName()){
+//                System.out.print(s + "\t");
+//            }
+//            System.out.println("");
+//            String[][] r = d.lerRegistros(0, 100000);
+//            System.out.println(r.length+"\n\n");
+//            
+//            for(String s: r[0]){
+//                System.out.print(s + "\n");
+//            }
+//            System.out.println("\n\n");
+//            for(String s: r[7000]){
+//                System.out.print(s + "\n");
+//            }
             
         } catch (Exception e) {
             System.out.println("\ndeu ruim");

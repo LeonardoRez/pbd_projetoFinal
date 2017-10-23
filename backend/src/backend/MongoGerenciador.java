@@ -18,16 +18,15 @@ public class MongoGerenciador {
     private MongoClient mongoClient;
     private String colecao;
     DBFGerenciador dbfG;
-    
 
     public MongoGerenciador(String conexao, String arquivoDBF, String colecao) {
         this.conexaoString = new MongoClientURI(conexao);
         this.colecao = colecao;
-        
+
         dbfG = new DBFGerenciador(arquivoDBF);
         try {
             mongoClient = new MongoClient(conexaoString);
-            
+
         } catch (UnknownHostException e) {
             System.out.println("string de conexão inválida");
         }
@@ -40,14 +39,16 @@ public class MongoGerenciador {
         System.out.println("Coleção acessada no banco com sucesso");
 
         try {
-            String[] colunasDBF = dbfG.carregarColunas();
+            dbfG.prepareDBF();
+            String[] colunasDBF = dbfG.getFieldName();
 
-            for (Object[] obj : dbfG.carregarRegistros()) {
+            for (int i=0;i< dbfG.getQuantRegistros();i++) {
                 //objeto que recebe as informações para serem gravadas no mongo
                 BasicDBObjectBuilder docBuilder = BasicDBObjectBuilder.start();
                 //pega coluna por coluna e adiciona no objeto docBuilder (criando um dicionário, que é como o mongo recebe e retorna as informações)
-                for (int i = 0; i < colunasDBF.length; i++) {
-                    docBuilder.append(colunasDBF[i], obj[i]);
+                String reg[] = dbfG.readNext();
+                for (int j = 0; j < colunasDBF.length; j++) {
+                    docBuilder.append(colunasDBF[j], reg[j]);
                 }
                 //adiciona o registro lido (linha no DBF) no mongo
                 collection.insert(docBuilder.get());
@@ -61,20 +62,22 @@ public class MongoGerenciador {
             e.printStackTrace();
         }
     }
+
     public DBCollection getCollection(String nomeDB, String nomeColecao) {
-		DB db = mongoClient.getDB(nomeDB);
-		return db.getCollection(nomeColecao);
-	}
+        DB db = mongoClient.getDB(nomeDB);
+        return db.getCollection(nomeColecao);
+    }
 
     public static void main(String[] args) {
-        MongoGerenciador m = new MongoGerenciador("mongodb://localhost:27017", "arquivo.dbf", "pessoa");
+        MongoGerenciador m = new MongoGerenciador("mongodb://localhost:27017", "arquivo_maior.dbf", "pessoa");
         m.converterDBFtoMONGO();
-        int quant=0;
-        DBCursor allResults = m.getCollection("pessoa","pessoa").find();
-        while (allResults.hasNext()) {
-            allResults.next();
-            quant++;
-        }
-        System.out.println("quantidade de registros: " + quant);
+//        int quant=0;
+//        DBCursor allResults = m.getCollection("pessoa","pessoa").find();
+//        while (allResults.hasNext()) {
+//            allResults.next();
+//            quant++;
+//        }
+//        System.out.println("quantidade de registros: " + quant);
+
     }
 }
