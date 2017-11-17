@@ -30,6 +30,7 @@ virtual/*
 !/backend/mongo-java-driver-2.13.3.jar
 !/backend/dans-dbf-lib-1.0.0-beta-10 .jar
 
+#DBFs grandes
 *arquivo_maior.dbf
 
 #arquivos do projeto adicionados pelo netbeans
@@ -37,9 +38,6 @@ virtual/*
 /testeDansDbf/build/
 /backend/nbproject/private/
 /backend/build/
-/frontend/nbproject/private/
-/frontend/build/
-/frontend/dist/
 /backend/dist/
 
 # OS X
@@ -58,14 +56,14 @@ Desktop.ini
 
 
 # npm
-node_modules
-package-lock.json
-*.log
-*.gz
+/frontend/node_modules
+/frontend/package-lock.json
+/frontend/*.log
+/frontend/*.gz
 
 
 # Coveralls
-coverage
+/frontend/coverage
 
 # Benchmarking
-benchmarks/graphs
+/frontend/benchmarks/graphs

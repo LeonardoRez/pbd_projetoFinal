@@ -39,7 +39,7 @@ html
     .wrapper
       header.main-header
         // Logo
-        a.logo(href='/')
+        a.logo(href='index2.html')
           // mini logo for sidebar mini 50x50 pixels
           span.logo-mini
             b A
@@ -64,35 +64,84 @@ html
             .pull-left.info
               p Alexander Pierce
               a(href='#')
+                i.fa.fa-circle.text-success
                 |  Online
-          // search form
-          form.sidebar-form(action='#', method='get')
-            .input-group
-              input.form-control(type='text', name='q', placeholder='Search...')
-              span.input-group-btn
-                button#search-btn.btn.btn-flat(type='submit', name='search')
-                  i.fa.fa-search
-          // /.search form
           // sidebar menu: : style can be found in sidebar.less
           ul.sidebar-menu(data-widget='tree')
             li.header MAIN NAVIGATION
             li
-              a(href='/helloworld')
+              a(href='https://adminlte.io/docs')
                 i.fa.fa-book
-                span Home
+                span Documentation
+            li.header LABELS
         // /.sidebar
       // Content Wrapper. Contains page content
       .content-wrapper
         // Content Header (Page header)
         section.content-header
           h1
-            | #{title}
+            | Dashboard
             small Control panel
+          ol.breadcrumb
+            li
+              a(href='#')
+                i.fa.fa-dashboard
+                |  Home
+            li.active Dashboard
         // Main content
         section.content
+          // Small boxes (Stat box)
           .row
-            //CONTEUDO DA PAGINA!
-            block content
+            .col-lg-3.col-xs-6
+              // small box
+              .small-box.bg-aqua
+                .inner
+                  h3 150
+                  p New Orders
+                .icon
+                  i.ion.ion-bag
+                a.small-box-footer(href='#')
+                  | More info 
+                  i.fa.fa-arrow-circle-right
+            // ./col
+            .col-lg-3.col-xs-6
+              // small box
+              .small-box.bg-green
+                .inner
+                  h3
+                    | 53
+                    sup(style='font-size: 20px') %
+                  p Bounce Rate
+                .icon
+                  i.ion.ion-stats-bars
+                a.small-box-footer(href='#')
+                  | More info 
+                  i.fa.fa-arrow-circle-right
+            // ./col
+            .col-lg-3.col-xs-6
+              // small box
+              .small-box.bg-yellow
+                .inner
+                  h3 44
+                  p User Registrations
+                .icon
+                  i.ion.ion-person-add
+                a.small-box-footer(href='#')
+                  | More info 
+                  i.fa.fa-arrow-circle-right
+            // ./col
+            .col-lg-3.col-xs-6
+              // small box
+              .small-box.bg-red
+                .inner
+                  h3 65
+                  p Unique Visitors
+                .icon
+                  i.ion.ion-pie-graph
+                a.small-box-footer(href='#')
+                  | More info 
+                  i.fa.fa-arrow-circle-right
+            // ./col
           // /.row
         // /.content
       // /.content-wrapper
