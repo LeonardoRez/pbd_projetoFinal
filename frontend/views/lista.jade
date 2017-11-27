@@ -20,6 +20,7 @@ block content
                       th.sorting_asc(tabindex='0', aria-controls='example2', rowspan='1', colspan='1', aria-sort='ascending', aria-label='Rendering engine: activate to sort column descending') #{key}
                   //- th.sorting(tabindex='0', aria-controls='example2', rowspan='1', colspan='1', aria-label='Browser: activate to sort column ascending') Browser
               tbody
+                //- - console.log("tamanho query: "+documentos.length);
                 each user in documentos
                   tr.odd(role='row')
                     each key,i in user
@@ -38,22 +39,40 @@ block content
           .col-sm-7
             #example2_paginate.dataTables_paginate.paging_simple_numbers
               ul.pagination
-                li#example2_previous.paginate_button.previous.disabled
-                  a(href='#', aria-controls='example2', data-dt-idx='0', tabindex='0') Anterior
-                li.paginate_button.active
-                  a(href='#', aria-controls='example2', data-dt-idx='1', tabindex='0') 1
-                li.paginate_button
-                  a(href='#', aria-controls='example2', data-dt-idx='2', tabindex='0') 2
-                li.paginate_button
-                  a(href='#', aria-controls='example2', data-dt-idx='3', tabindex='0') 3
-                li.paginate_button
-                  a(href='#', aria-controls='example2', data-dt-idx='4', tabindex='0') 4
-                li.paginate_button
-                  a(href='#', aria-controls='example2', data-dt-idx='5', tabindex='0') 5
-                li.paginate_button
-                  a(href='#', aria-controls='example2', data-dt-idx='6', tabindex='0') 6
+                if pg_atual == 1
+                  li#example2_previous.paginate_button.previous.disabled
+                    a(href='#', aria-controls='example2', data-dt-idx='0', tabindex='0') Anterior
+                else
+                  li#example2_previous.paginate_button.previous
+                    a(href='/tabela/'+(pg_atual-1), aria-controls='example2', data-dt-idx='0', tabindex='0') Anterior
+                - for(var j = 1; j < 10 ; j++){
+                  if Number(pg_atual) == j
+                    li.paginate_button.active
+                      a(href='/tabela/'+(j), aria-controls='example2', data-dt-idx=j, tabindex='0')= j
+                  else
+                    li.paginate_button
+                      a(href='/tabela/'+(j), aria-controls='example2', data-dt-idx=j, tabindex='0')= j
+                - }
+                //- li.paginate_button
+                //-   a(href='#', aria-controls='example2', data-dt-idx='2', tabindex='0') 2
+                //- li.paginate_button
+                //-   a(href='#', aria-controls='example2', data-dt-idx='3', tabindex='0') 3
+                //- li.paginate_button
+                //-   a(href='#', aria-controls='example2', data-dt-idx='4', tabindex='0') 4
+                //- li.paginate_button
+                //-   a(href='#', aria-controls='example2', data-dt-idx='5', tabindex='0') 5
+                
+                if (total/skip) > 10
+                  li.paginate_button
+                    a(href='#', aria-controls='example2', data-dt-idx='6', tabindex='0') ...
+                  li.paginate_button
+                    a(href='/tabela/'+(parseInt(total/skip)), aria-controls='example2', data-dt-idx='6', tabindex='0')= parseInt(total/skip)
+                    
                 li#example2_next.paginate_button.next
-                  a(href='#', aria-controls='example2', data-dt-idx='7', tabindex='0') Próximo
+                  if pg_atual < (total/skip)
+                    a(href='/tabela/'+(Number(pg_atual)+1), aria-controls='example2', data-dt-idx='7', tabindex='0') Próximo
+                  else
+                    a(href='/tabela/'+(pg_atual), aria-controls='example2', data-dt-idx='7', tabindex='0') Próximo
     // /.box-body
   //- .box
   //-   h1  #{total}
