@@ -61,6 +61,32 @@ router.get('/', function (req, res) {
       "skip": skip
     });
   });
-})
+});
+
+/* Pagina de configuração */
+router.get('/configurar', function (req, res){
+
+  var db = req.db;
+  var collection = db.get('pessoa');
+  var colecoes = db.get('config');// var docs;
+
+  console.log("\n\n\n\n\n\n\n");
+  console.log(colecoes);
+  console.log("\n\n\n\n\n\n\n");
+  console.log(collection);
+
+  collection.find({}, { limit: 1 }, function (e, d) {
+    // docs = d;  
+    // use test;
+    // db.collectionNames(function (err, collections) {
+    //   console.log(collections);
+    // }); 
+    console.log(teste);
+    res.render('configurar', {
+      "titulo": "Configurar Labels",
+      "reg": d
+    });
+  });
+});
 
 module.exports = router;

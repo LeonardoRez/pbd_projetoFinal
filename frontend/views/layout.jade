@@ -39,7 +39,7 @@ html
     .wrapper
       header.main-header
         // Logo
-        a.logo(href='index2.html')
+        a.logo(href='/')
           // mini logo for sidebar mini 50x50 pixels
           span.logo-mini
             b A
@@ -74,6 +74,10 @@ html
                 i.fa.fa-book
                 span Documentation
             li
+              a(href='/configurar')
+                i.fa.fa-gears
+                span Configurar
+            li
               a(href='/helloworld')
                 i.fa.fa-shield
                 span Helloworld
@@ -85,13 +89,12 @@ html
         section.content-header
           h1
             | #{titulo}
-            small Control panel
           ol.breadcrumb
             li
-              a(href='#')
-                i.fa.fa-dashboard
-                |  Home
-            li.active Dashboard
+            //-   a(href='#')
+            //-     i.fa.fa-dashboard
+            //-     |  Home
+            //- li.active Dashboard
         // Main content
         section.content
           
@@ -101,14 +104,13 @@ html
       // /.content-wrapper
       footer.main-footer
         .pull-right.hidden-xs
-          b Version
-          |  2.4.0
+          b Versão
+          |  0.1
         strong
-          | Copyright © 2014-2016 
-          a(href='https://adminlte.io') Almsaeed Studio
-          | .
-        |  All rights
-        |     reserved.
+          | Trabalho de Projeto de Banco de dados
+          a(href='https://github.com/LeonardoRez/pbd_projetoFinal')
+            |.  
+            i.fa.fa-github  repositório
       // Control Sidebar
       aside.control-sidebar.control-sidebar-dark
         // Create the tabs

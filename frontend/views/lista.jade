@@ -45,7 +45,7 @@ block content
                 else
                   li#example2_previous.paginate_button.previous
                     a(href='/tabela/'+(pg_atual-1), aria-controls='example2', data-dt-idx='0', tabindex='0') Anterior
-                - for(var j = 1; j < 10 ; j++){
+                - for(var j = 1; j < 10 && j < parseInt(total/skip); j++){
                   if Number(pg_atual) == j
                     li.paginate_button.active
                       a(href='/tabela/'+(j), aria-controls='example2', data-dt-idx=j, tabindex='0')= j
@@ -68,11 +68,12 @@ block content
                   li.paginate_button
                     a(href='/tabela/'+(parseInt(total/skip)), aria-controls='example2', data-dt-idx='6', tabindex='0')= parseInt(total/skip)
                     
-                li#example2_next.paginate_button.next
-                  if pg_atual < (total/skip)
-                    a(href='/tabela/'+(Number(pg_atual)+1), aria-controls='example2', data-dt-idx='7', tabindex='0') Próximo
+                  if pg_atual < parseInt(total/skip)
+                    li#example2_next.paginate_button.next
+                      a(href='/tabela/'+(Number(pg_atual)+1), aria-controls='example2', data-dt-idx='7', tabindex='0') Próximo
                   else
-                    a(href='/tabela/'+(pg_atual), aria-controls='example2', data-dt-idx='7', tabindex='0') Próximo
+                    li#example2_next.paginate_button.next.disabled
+                      a(href='/tabela/'+(pg_atual), aria-controls='example2', data-dt-idx='7', tabindex='0') Próximo
     // /.box-body
   //- .box
   //-   h1  #{total}

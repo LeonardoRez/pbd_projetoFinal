@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    .col-md-6
+        .box.box-info
+            .box-header.with-border
+                h3.box-title Títulos das colunas
+            // /.box-header
+            // form start
+            form.form-horizontal
+                .box-body
+                each i,key in reg[0]
+                    if key != '_id'
+                        .form-group
+                            label.col-sm-2.control-label(for='inputEmail3')= key
+                            .col-sm-9
+                                input#inputEmail3.form-control(type='email', placeholder=key)
+                .form-group
+                    label.col-sm-2.control-label(for='inputPassword3') Passwordasdasdasd
+                    .col-sm-9
+                        input#inputPassword3.form-control(type='password', placeholder='Password')
+                .box-footer
+                button.btn.btn-default(type='submit') Cancelar
+                button.btn.btn-info.pull-right(type='submit') Salvar
+                
+                // /.box-footer
